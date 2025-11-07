@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <!-- AntiScam ID — Redesigned v2 (Closer to Discord UI) --><!DOCTYPE html><html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>AntiScam ID</title>
+
+  <style>
+
+    /* ===== DISCORD DARK THEME REAL ===== */
+
+    body {
+
+      margin: 0;
+
+      background: #1e1f22;
+
+      color: #f2f3f5;
+
+      font-family: "Segoe UI", sans-serif;
+
+    }/* ===== TOPBAR BERANDA SAJA ===== */
+
+#topbar {
+
+  height: 55px;
+
+  background: #2b2d31;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 0 15px;
+
+  border-bottom: 1px solid #111;
+
+}
+
+.logo {
+
+  font-size: 22px;
+
+  font-weight: bold;
+
+  color: #ffffff;
+
+}
+
+.searchContainer {
+
+  background: #1a1b1e;
+
+  padding: 8px 12px;
+
+  border-radius: 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  width: 150px;
+
+}
+
+.searchContainer input {
+
+  background: transparent;
+
+  border: none;
+
+  outline: none;
+
+  color: white;
+
+  width: 100%;
+
+  font-size: 14px;
+
+}
+
+.dropdown {
+
+  background: #1a1b1e;
+
+  color: white;
+
+  border-radius: 15px;
+
+  font-size: 12px;
+
+  padding: 4px;
+
+  border: 1px solid #333;
+
+}
+
+/* ===== NAVBAR MIRIP DISCORD ===== */
+
+.navbar {
+
+  position: fixed;
+
+  bottom: 0;
+
+  left: 0;
+
+  width: 100%;
+
+  height: 70px;
+
+  background: #232428;
+
+  display: flex;
+
+  justify-content: space-around;
+
+  align-items: center;
+
+  border-top: 1px solid #111;
+
+}
+
+.navbtn {
+
+  text-align: center;
+
+  font-size: 12px;
+
+  color: #c2c2c2;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 4px;
+
+}
+
+.navbtn img {
+
+  width: 22px;
+
+  opacity: 0.7;
+
+}
+
+.active {
+
+  color: #5865f2;
+
+}
+
+.active img {
+
+  opacity: 1;
+
+}
+
+/* ===== PAGES ===== */
+
+.page { display: none; padding: 20px; }
+
+.show { display: block; }
+
+/* ===== CARD ===== */
+
+.card {
+
+  background: #2b2d31;
+
+  padding: 15px;
+
+  border-radius: 12px;
+
+  margin-bottom: 15px;
+
+  border: 1px solid #111;
+
+}
+
+/* ===== UPLOAD FORM ===== */
+
+.input {
+
+  width: 100%;
+
+  background: #1a1b1e;
+
+  border: none;
+
+  padding: 10px;
+
+  border-radius: 8px;
+
+  color: white;
+
+  margin-bottom: 10px;
+
+}
+
+.btn {
+
+  width: 100%;
+
+  padding: 12px;
+
+  background: #5865f2;
+
+  border: none;
+
+  border-radius: 8px;
+
+  color: white;
+
+  font-size: 16px;
+
+}
+
+/* ===== LOGIN PAGE SUPER KEREN ===== */
+
+#loginPage {
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  height: 100vh;
+
+  flex-direction: column;
+
+  gap: 15px;
+
+  background: #1e1f22;
+
+}
+
+.loginbox {
+
+  background: #2b2d31;
+
+  padding: 25px;
+
+  border-radius: 15px;
+
+  width: 85%;
+
+  max-width: 350px;
+
+  text-align: center;
+
+  box-shadow: 0 0 20px #0007;
+
+}
+
+.googleBtn {
+
+  width: 100%;
+
+  background: #ffffff;
+
+  color: #000;
+
+  padding: 10px;
+
+  border-radius: 8px;
+
+  font-weight: bold;
+
+  margin-top: 10px;
+
+}
+
+  </style>
+
+</head>
+
+<body><!-- LOGIN PAGE BARU --><div id="loginPage">
+
+  <div class="loginbox">
+
+    <h2 style="margin-top:0; color:white;">AntiScam ID</h2>
+
+    <input id="userInput" class="input" placeholder="Username" />
+
+    <input id="passInput" class="input" type="password" placeholder="Password" />
+
+    <button class="btn" onclick="login()">Login</button>
+
+    <button class="googleBtn">Login with Google</button>
+
+  </div>
+
+</div><!-- APP UI --><div id="app" style="display:none;">  <!-- TOPBAR HANYA DI BERANDA -->  <div id="topbar">
+
+    <div class="logo">ASID</div>
+
+    <select id="searchMode" class="dropdown">
+
+      <option value="nama">Nama</option>
+
+      <option value="nomor">Nomor</option>
+
+    </select>
+
+    <div class="searchContainer">
+
+      <input id="search" placeholder="Cari..." />
+
+    </div>
+
+  </div>  <!-- ===== HOME ===== -->  <div id="homePage" class="page show">
+
+    <div class="card">
+
+      <h3>AntiScam ID</h3>
+
+      <p>Website ini dibuat untuk mencegah penipuan (scam) di Indonesia dengan menyediakan database nomor dan identitas yang pernah digunakan dalam tindak ilegal.</p>
+
+      <p><b>Jika Anda merasa data Anda muncul di sini padahal Anda tidak melakukan scam, atau Anda sudah berhenti dari dunia gelap namun identitas Anda masih tersebar, silakan DM IG admin:</b> <br><b>@pirmanww</b><br>Nomor WhatsApp admin saat ini sedang bermasalah.</p>
+
+    </div><div id="posts"></div>
+
+  </div>  <!-- ===== UPLOAD ===== -->  <div id="uploadPage" class="page">
+
+    <div class='card'>
+
+      <h3>Upload Laporan Scam</h3>
+
+      <input id='upName' class='input' placeholder='Nama pelaku' />
+
+      <input id='upNum' class='input' placeholder='Nomor telepon' />
+
+      <textarea id='upDesc' class='input' placeholder='Deskripsi lengkap modus' style='height:100px'></textarea>
+
+      <input id='upImg' type='file' class='input' accept='image/*' multiple />
+
+      <p style='font-size:12px;color:#aaa;margin-top:-5px;'>Maksimal 10 screenshot bukti</p>
+
+      <button class='btn' onclick='uploadPost()'>Kirim Laporan</button>
+
+    </div>
+
+    <div class="card">
+
+      <h3>Upload Laporan Scam</h3>
+
+      <input id="upName" class="input" placeholder="Nama pelaku" />
+
+      <input id="upNum" class="input" placeholder="Nomor telepon" />
+
+      <textarea id="upDesc" class="input" placeholder="Deskripsi lengkap modus" style="height:100px"></textarea>
+
+      <button class="btn" onclick="uploadPost()">Kirim Laporan</button>
+
+    </div>
+
+  </div>  <!-- ===== PROFILE ===== -->  <div id="profilePage" class="page">
+
+    <div class="card" style="text-align:center; padding:25px;">
+
+      <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" style="width:80px; opacity:0.9; margin-bottom:15px;" />
+
+      <h2 style="margin:0;">Profil</h2>
+
+      <p id="profUser" style="font-size:15px; color:#b5b5b5; margin:6px 0;"></p>
+
+      <p id="profRole" style="font-size:14px; background:#1a1b1e; padding:6px 10px; border-radius:6px; display:inline-block; margin-top:4px;"></p>
+
+      <hr style="border:0; border-top:1px solid #444; margin:20px 0;">
+
+      <div style="text-align:left; font-size:14px; color:#cfcfcf; line-height:1.4;">
+
+        <p><b>Catatan Keamanan:</b></p>
+
+        <p>Jika Anda merasa data Anda muncul padahal Anda tidak melakukan scam, atau identitas Anda tersebar padahal sudah berhenti dari dunia gelap, silakan hubungi admin via DM IG <b>@pirmanww</b>.</p>
+
+        <p>Nomor WhatsApp admin sedang bermasalah dan tidak dapat digunakan untuk saat ini.</p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  </div></div><!-- ===== NAVBAR ===== --><div class="navbar">
+
+  <div class="navbtn active" onclick="openPage('home')">
+
+    <img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" />
+
+    Home
+
+  </div>
+
+  <div class="navbtn" onclick="openPage('upload')">
+
+    <img src="https://cdn-icons-png.flaticon.com/512/1828/1828817.png" />
+
+    Upload
+
+  </div>
+
+  <div class="navbtn" onclick="openPage('profile')">
+
+    <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" />
+
+    You
+
+  </div>
+
+</div><script>
+
+let user = null;
+
+let posts = [];
+
+function login(){
+
+  const u = document.getElementById('userInput').value;
+
+  const p = document.getElementById('passInput').value;
+
+  if(!u || !p){ alert('Isi dulu bosku'); return; }
+
+  user = { username: u, role: (u === 'admin' ? 'admin' : 'user') };
+
+  document.getElementById('loginPage').style.display = 'none';
+
+  document.getElementById('app').style.display = 'block';
+
+  document.getElementById('profUser').innerText = "Username: " + user.username;
+
+  document.getElementById('profRole').innerText = "Role: " + user.role;
+
+}
+
+function openPage(p){
+
+  document.querySelectorAll('.page').forEach(pg => pg.classList.remove('show'));
+
+  document.querySelectorAll('.navbtn').forEach(n => n.classList.remove('active'));
+
+  if(p === 'home'){
+
+    document.getElementById('homePage').classList.add('show');
+
+    document.querySelectorAll('.navbtn')[0].classList.add('active');
+
+    document.getElementById('topbar').style.display = 'flex';
+
+  }
+
+  if(p === 'upload'){
+
+    document.getElementById('uploadPage').classList.add('show');
+
+    document.querySelectorAll('.navbtn')[1].classList.add('active');
+
+    document.getElementById('topbar').style.display = 'none';
+
+  }
+
+  if(p === 'profile'){
+
+    document.getElementById('profilePage').classList.add('show');
+
+    document.querySelectorAll('.navbtn')[2].classList.add('active');
+
+    document.getElementById('topbar').style.display = 'none';
+
+  }
+
+}
+
+function uploadPost(){
+
+  const n = document.getElementById('upName').value;
+
+  const num = document.getElementById('upNum').value;
+
+  const d = document.getElementById('upDesc').value;
+
+  if(!n || !num || !d){ alert('Lengkapi semua kolom'); return; }
+
+  posts.push({name:n, number:num, desc:d});
+
+  renderPosts();
+
+  alert('Laporan masuk, menunggu review admin.');
+
+}
+
+function renderPosts(){
+
+  let box = document.getElementById('posts');
+
+  box.innerHTML = '';
+
+  posts.forEach(p => {
+
+    box.innerHTML += `
+
+    <div class='card'>
+
+      <h3>${p.name}</h3>
+
+      <p><b>Nomor:</b> ${p.number}</p>
+
+      <p>${p.desc}</p>
+
+    </div>`;
+
+  });
+
+}
+
+function uploadPost(){
+
+  const n = document.getElementById('upName').value;
+
+  const num = document.getElementById('upNum').value;
+
+  const d = document.getElementById('upDesc').value;
+
+  const files = document.getElementById('upImg').files;
+
+  if(!n || !num || !d){ alert('Lengkapi semua kolom'); return; }
+
+  if(files.length > 10){ alert('Maksimal 10 gambar'); return; }
+
+  let imgs = [];
+
+  for(let i=0;i<files.length;i++){
+
+    imgs.push(URL.createObjectURL(files[i]));
+
+  }
+
+  posts.push({name:n, number:num, desc:d, imgs:imgs, status:'pending'});
+
+  renderPosts();
+
+  alert('Laporan masuk, menunggu review admin.');
+
+}
+
+function renderPosts(){
+
+  let box = document.getElementById('posts');
+
+  box.innerHTML = '';
+
+  posts.forEach((p,i) => {
+
+    let imgTags = '';
+
+    if(p.imgs){ p.imgs.forEach(src=>{ imgTags += `<img src='${src}' style='width:100%;border-radius:8px;margin-top:6px;'/>`; }); }
+
+    box.innerHTML += `
+
+    <div class='card'>
+
+      <h3>${p.name} ${p.status==='pending' ? '(Pending)' : ''}</h3>
+
+      <p><b>Nomor:</b> ${p.number}</p>
+
+      <p>${p.desc}</p>
+
+      ${imgTags}
+
+      ${user.role==='admin' ? `<button onclick='approve(${i})' class='btn' style='margin-top:10px;background:#2d7d46;'>Approve</button><button onclick='reject(${i})' class='btn' style='margin-top:10px;background:#a12f2f;'>Hapus</button>`:''}
+
+    </div>`;
+
+  });
+
+}
+
+function approve(i){ posts[i].status='approved'; renderPosts(); }
+
+function reject(i){ posts.splice(i,1); renderPosts(); }
+
+</script></body>
+
+</html>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>
