@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Yg ke 2 </title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <!doctype html>
+
+<html lang="id">
+
+<head>
+
+<meta charset="utf-8" />
+
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>AntiScam ID</title>
+
+<style>
+
+  :root{
+
+    --bg:#1e1f22; --panel:#2b2d31; --card:#2b2d31;
+
+    --text:#f2f3f5; --muted:#b5b5b5; --accent:#5865f2;
+
+    --green:#2d7d46; --red:#a12f2f;
+
+  }
+
+  *{box-sizing:border-box}
+
+  body{margin:0;font-family:Segoe UI,system-ui,Arial;background:var(--bg);color:var(--text)}
+
+  a{color:inherit}
+
+  /* Topbar & header */
+
+  header{height:56px;background:var(--panel);display:flex;align-items:center;padding:0 14px;gap:12px;border-bottom:1px solid #111;position:sticky;top:0;z-index:10}
+
+  .brand{font-weight:700}
+
+  .search{background:#18191b;padding:8px 10px;border-radius:16px;display:flex;gap:8px;align-items:center;min-width:220px}
+
+  .search select{background:transparent;border:0;color:var(--text);outline:none}
+
+  .search input{background:transparent;border:0;outline:none;color:var(--text);flex:1}
+
+  main{padding:14px;max-width:980px;margin:0 auto}
+
+  .card{background:var(--card);padding:14px;border-radius:10px;margin-bottom:12px;border:1px solid #111}
+
+  .small{font-size:13px;color:var(--muted)}
+
+  /* navbar bottom */
+
+  .nav{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:12px;z-index:20}
+
+  .navbtn{width:64px;height:64px;border-radius:14px;background:var(--panel);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--text);font-size:12px;border:1px solid rgba(255,255,255,0.03);cursor:pointer}
+
+  .navbtn.center{width:74px;height:74px;border-radius:18px;background:linear-gradient(180deg,var(--accent),#3f45d9)}
+
+  /* posts */
+
+  .post{padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);margin-bottom:10px;border:1px solid rgba(255,255,255,0.03)}
+
+  .meta{display:flex;gap:10px;align-items:center;margin-bottom:8px}
+
+  .avatar{width:46px;height:46px;border-radius:8px;background:#111;display:flex;align-items:center;justify-content:center;font-weight:700}
+
+  .role{font-size:12px;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,0.03);color:var(--muted);margin-left:6px}
+
+  .actions{display:flex;gap:8px;margin-top:8px}
+
+  .btn{padding:8px 12px;border-radius:8px;border:0;background:var(--accent);color:#fff;cursor:pointer}
+
+  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04)}
+
+  .btn.green{background:var(--green)}
+
+  .btn.red{background:var(--red)}
+
+  /* modal / overlay */
+
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:50}
+
+  .modal{width:100%;max-width:640px;background:var(--card);padding:14px;border-radius:10px}
+
+  /* login */
+
+  #loginPage{display:flex;align-items:center;justify-content:center;height:100vh}
+
+  .loginbox{width:360px;background:var(--card);padding:22px;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.6);text-align:center}
+
+  .input{width:100%;padding:10px;border-radius:8px;border:1px solid #111;background:#1a1b1e;color:var(--text);margin-bottom:10px}
+
+  /* profile */
+
+  .profile-center{text-align:center}
+
+  .profile-pic{width:96px;height:96px;border-radius:50%;background:#222;display:inline-flex;align-items:center;justify-content:center;font-size:30px;color:#fff;margin-bottom:10px;border:2px solid #222}
+
+  footer{margin-top:30px}
+
+  @media(max-width:520px){ .loginbox{width:92%} .nav{gap:8px} .search{min-width:140px} }
+
+</style>
+
+</head>
+
+<body>
+
+<!-- LOGIN PAGE -->
+
+<div id="loginPage">
+
+  <div class="loginbox" role="region" aria-label="Login">
+
+    <h2 style="margin:6px 0 12px">AntiScam ID</h2>
+
+    <input id="userInput" class="input" placeholder="Username (atau kosong -> Guest)" />
+
+    <input id="passInput" class="input" type="password" placeholder="Password" />
+
+    <button id="loginBtn" class="btn" style="margin-bottom:8px">Login</button>
+
+    <div style="display:flex;gap:8px;margin-bottom:8px">
+
+      <button id="guestBtn" class="btn ghost" style="flex:1">Masuk sebagai Nonim</button>
+
+      <button id="clearBtn" class="btn ghost" style="flex:1">Clear</button>
+
+    </div>
+
+    <div class="small">Admin credential tersedia untuk pengelolaan (Adminn).</div>
+
+  </div>
+
+</div>
+
+<!-- APP -->
+
+<div id="app" style="display:none;flex-direction:column;min-height:100vh;">
+
+  <header>
+
+    <div class="brand">AntiScam ID</div>
+
+    <div class="search" role="search" style="margin-left:12px">
+
+      <select id="searchMode"><option value="nama">Nama</option><option value="nomor">Nomor</option></select>
+
+      <input id="searchInput" placeholder="Cari..." />
+
+      <button id="searchBtn" class="btn ghost">Cari</button>
+
+    </div>
+
+    <div id="userArea" style="margin-left:auto"></div>
+
+  </header>
+
+  <main>
+
+    <div id="homeView" class="view">
+
+      <div class="card">
+
+        <h3>Community Reports</h3>
+
+        <p class="small">Bagikan pengalaman penipuan agar pengguna lain tidak tertipu. Laporan dari pengguna biasa akan disetujui oleh admin sebelum tampil publik.</p>
+
+      </div>
+
+      <div id="postsList"></div>
+
+      <div id="emptyNote" class="card small" style="display:none">Belum ada laporan.</div>
+
+    </div>
+
+    <div id="adminView" class="view" style="display:none">
+
+      <div class="card">
+
+        <h3>Admin Dashboard</h3>
+
+        <p class="small">Di sini admin dapat melihat laporan pending dan menanganinya.</p>
+
+      </div>
+
+      <div id="adminPending"></div>
+
+    </div>
+
+    <div id="profileView" class="view" style="display:none">
+
+      <div class="card profile-center">
+
+        <div id="profPic" class="profile-pic">U</div>
+
+        <div><input id="changeAvatar" type="file" accept="image/*" style="display:none" /></div>
+
+        <div style="margin:8px 0"><button id="editAvatarBtn" class="btn ghost">Ganti Foto</button></div>
+
+        <h3 id="profName">Username</h3>
+
+        <div id="roleLabel" class="small" style="margin-bottom:8px"></div>
+
+        <div style="text-align:left;max-width:600px;margin:0 auto">
+
+          <label class="small">Bio</label>
+
+          <textarea id="bioInput" class="input" style="height:80px"></textarea>
+
+          <div style="display:flex;gap:8px">
+
+            <button id="saveBioBtn" class="btn" style="flex:1">Simpan Bio</button>
+
+            <button id="logoutBtn" class="btn ghost" style="flex:1">Logout</button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- upload modal -->
+
+    <div id="overlay" class="overlay" aria-hidden="true">
+
+      <div class="modal" role="dialog" aria-modal="true">
+
+        <h3 style="margin-top:0">Upload Laporan</h3>
+
+        <input id="upName" class="input" placeholder="Nama pelaku / akun" />
+
+        <input id="upNum" class="input" placeholder="Nomor telepon" />
+
+        <textarea id="upDesc" class="input" placeholder="Deskripsi modus" style="min-height:120px"></textarea>
+
+        <input id="upImg" type="file" class="input" accept="image/*" multiple />
+
+        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px">
+
+          <button id="cancelUpload" class="btn ghost">Batal</button>
+
+          <button id="submitUpload" class="btn green">Kirim</button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- bottom nav -->
+
+  <div class="nav" role="navigation" aria-label="Navigation">
+
+    <div id="navHome" class="navbtn" title="Home">🏠<div style="font-size:11px">Home</div></div>
+
+    <div id="navUpload" class="navbtn center" title="Upload">⬆️<div style="font-size:12px">Upload</div></div>
+
+    <div id="navProfile" class="navbtn" title="Profile">👤<div style="font-size:11px">You</div></div>
+
+  </div>
+
+</div>
+
+<!-- footer (paste above </body>) -->
+
+<footer style="text-align:center; font-size:13px; color:#aaa; padding:20px; background:#1a1b1e; margin-top:40px; border-top:1px solid #111; line-height:1.6;">
+
+  <p><b>AntiScam ID</b> dibuat untuk membantu mencegah penipuan (scam) di Indonesia dengan menyediakan informasi mengenai nomor dan identitas yang pernah dilaporkan terlibat dalam aktivitas ilegal.</p>
+
+  <p>Jika Anda merasa data Anda muncul di sini padahal Anda tidak melakukan tindakan penipuan, atau Anda telah berhenti dari aktivitas tersebut namun identitas Anda masih tersebar, silakan hubungi admin melalui DM Instagram: <b>@pirmanww</b>.</p>
+
+  <p>Admin akan memberikan instruksi dan syarat yang diperlukan untuk proses verifikasi data. Nomor WhatsApp admin saat ini tidak aktif.</p>
+
+  <hr style="border:0; border-top:1px solid #333; margin:15px 0;">
+
+  <p id="moralText" style="font-style:italic; color:#999; font-size:14px;"></p>
+
+</footer>
+
+<script>
+
+/*
+
+  Full single-file app (client-side demo).
+
+  Admin credential (case-insensitive username) => username: "Adminn", password: "Pw000333000"
+
+  Data stored in localStorage under keys:
+
+    - asid_user_session
+
+    - asid_posts
+
+    - asid_profile_<username>
+
+*/
+
+const ADMIN_USERNAME = "adminn";
+
+const ADMIN_PASSWORD = "Pw000333000";
+
+// Storage keys
+
+const KEY_SESSION = "asid_user_session_v3";
+
+const KEY_POSTS = "asid_posts_v3";
+
+// UI refs
+
+const loginPage = document.getElementById("loginPage");
+
+const app = document.getElementById("app");
+
+const userArea = document.getElementById("userArea");
+
+const postsList = document.getElementById("postsList");
+
+const overlay = document.getElementById("overlay");
+
+const adminPending = document.getElementById("adminPending");
+
+const profPic = document.getElementById("profPic");
+
+const profName = document.getElementById("profName");
+
+const roleLabel = document.getElementById("roleLabel");
+
+const bioInput = document.getElementById("bioInput");
+
+const changeAvatar = document.getElementById("changeAvatar");
+
+let session = null;
+
+let posts = [];
+
+// init
+
+function init(){
+
+  // load posts
+
+  posts = JSON.parse(localStorage.getItem(KEY_POSTS) || "[]");
+
+  // load session
+
+  const s = localStorage.getItem(KEY_SESSION);
+
+  if(s){
+
+    session = JSON.parse(s);
+
+    showApp();
+
+  } else {
+
+    loginPage.style.display = "flex";
+
+  }
+
+  renderPosts();
+
+  runMoralTyping();
+
+}
+
+init();
+
+// helpers
+
+function saveSession(){
+
+  if(session) localStorage.setItem(KEY_SESSION, JSON.stringify(session));
+
+  else localStorage.removeItem(KEY_SESSION);
+
+}
+
+function savePosts(){ localStorage.setItem(KEY_POSTS, JSON.stringify(posts)); }
+
+// login handlers
+
+document.getElementById("loginBtn").addEventListener("click", doLogin);
+
+document.getElementById("guestBtn").addEventListener("click", doGuest);
+
+document.getElementById("clearBtn").addEventListener("click", ()=>{ document.getElementById('userInput').value=''; document.getElementById('passInput').value=''; });
+
+function doLogin(){
+
+  const u = (document.getElementById("userInput").value || "").trim();
+
+  const p = (document.getElementById("passInput").value || "").trim();
+
+  if(!u || !p){ alert("Isi username & password atau pilih Nonim."); return; }
+
+  if(u.toLowerCase() === ADMIN_USERNAME.toLowerCase() && p === ADMIN_PASSWORD){
+
+    session = { username: ADMIN_USERNAME.toLowerCase(), displayName: "Nonim", role: "admin" };
+
+  } else {
+
+    session = { username: u, displayName: u, role: "user" };
+
+  }
+
+  saveSession();
+
+  showApp();
+
+  alert(session.role === "admin" ? "Masuk sebagai Admin (Nonim)" : "Masuk sebagai Pengguna");
+
+}
+
+function doGuest(){
+
+  session = { username: "nonim_" + Date.now(), displayName: "Nonim", role: "anon" };
+
+  saveSession();
+
+  showApp();
+
+  alert("Masuk sebagai Akun Nonim / Berwaspada");
+
+}
+
+function showApp(){
+
+  loginPage.style.display = "none";
+
+  app.style.display = "flex";
+
+  renderUserArea();
+
+  renderPosts();
+
+  renderAdminPending();
+
+  openView("home");
+
+}
+
+function logout(){
+
+  if(!confirm("Logout?")) return;
+
+  session = null;
+
+  saveSession();
+
+  loginPage.style.display = "flex";
+
+  app.style.display = "none";
+
+}
+
+// render user area (top-right)
+
+function renderUserArea(){
+
+  if(!session) return;
+
+  const display = escapeHtml(session.displayName || session.username);
+
+  const roleText = session.role === "admin" ? "Peran: Admin" : (session.role==="anon"? "Akun Nonim / Berwaspada":"Peran: Pengguna");
+
+  userArea.innerHTML = `<div style="text-align:right">
+
+    <div style="font-weight:700">${display}</div>
+
+    <div class="small">${roleText}</div>
+
+  </div>`;
+
+  // profile details load
+
+  loadProfileToUI();
+
+}
+
+// profile storage per username
+
+function profileKey(username){ return "asid_profile_" + (username||"guest"); }
+
+function loadProfile(username){
+
+  return JSON.parse(localStorage.getItem(profileKey(username)) || '{"bio":"","avatar":""}');
+
+}
+
+function saveProfile(username, profile){
+
+  localStorage.setItem(profileKey(username), JSON.stringify(profile));
+
+}
+
+// profile UI
+
+function loadProfileToUI(){
+
+  const uname = session ? session.username : "guest";
+
+  const p = loadProfile(uname);
+
+  profName.innerText = session.displayName || uname;
+
+  roleLabel.innerText = session.role === "admin" ? "Admin" : (session.role==="anon" ? "⚠️ Nonim / Berwaspada" : "Pengguna");
+
+  bioInput.value = p.bio || "";
+
+  if(p.avatar){
+
+    profPic.style.backgroundImage = `url(${p.avatar})`;
+
+    profPic.style.backgroundSize = "cover"; profPic.innerText = "";
+
+  } else {
+
+    profPic.style.backgroundImage = "";
+
+    profPic.innerText = (session.displayName||session.username)[0]?.toUpperCase() || "U";
+
+  }
+
+}
+
+// avatar change
+
+document.getElementById("editAvatarBtn")?.addEventListener("click", ()=> changeAvatar.click());
+
+changeAvatar.addEventListener("change", (e)=>{
+
+  const file = e.target.files[0];
+
+  if(!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(evt){
+
+    const data = evt.target.result;
+
+    // save to profile
+
+    const key = session.username;
+
+    const p = loadProfile(key);
+
+    p.avatar = data;
+
+    saveProfile(key, p);
+
+    loadProfileToUI();
+
+    alert("Foto profil disimpan (lokal).");
+
+  };
+
+  reader.readAsDataURL(file);
+
+});
+
+// save bio
+
+document.getElementById("saveBioBtn").addEventListener("click", ()=>{
+
+  const key = session.username;
+
+  const p = loadProfile(key);
+
+  p.bio = bioInput.value || "";
+
+  saveProfile(key, p);
+
+  alert("Bio disimpan.");
+
+});
+
+// logout
+
+document.getElementById("logoutBtn").addEventListener("click", logout);
+
+// navigation
+
+document.getElementById("navHome").addEventListener("click", ()=> openView("home"));
+
+document.getElementById("navUpload").addEventListener("click", ()=> {
+
+  if(!session || session.role==="anon"){ alert("Nonim tidak dapat mengunggah laporan. Silakan buat akun."); return; }
+
+  overlay.style.display = "flex"; overlay.setAttribute("aria-hidden","false");
+
+});
+
+document.getElementById("navProfile").addEventListener("click", ()=> openView("profile"));
+
+document.getElementById("cancelUpload").addEventListener("click", ()=> { overlay.style.display="none"; overlay.setAttribute("aria-hidden","true"); });
+
+document.getElementById("submitUpload").addEventListener("click", submitUpload);
+
+// upload logic
+
+function submitUpload(){
+
+  const n = (document.getElementById("upName").value || "").trim();
+
+  const ph = (document.getElementById("upNum").value || "").trim();
+
+  const d = (document.getElementById("upDesc").value || "").trim();
+
+  const files = document.getElementById("upImg").files || [];
+
+  if(!n || !ph || !d){ alert("Lengkapi semua kolom."); return; }
+
+  if(files.length > 10){ alert("Maksimal 10 gambar."); return; }
+
+  const imgs = [];
+
+  const promises = [];
+
+  for(let i=0;i<files.length;i++){
+
+    promises.push(new Promise((res)=> {
+
+      const r = new FileReader();
+
+      r.onload = (ev)=>{ imgs.push(ev.target.result); res(); };
+
+      r.readAsDataURL(files[i]);
+
+    }));
+
+  }
+
+  Promise.all(promises).then(()=>{
+
+    const status = (session.role === "admin") ? "approved" : "pending";
+
+    const post = {
+
+      id: Date.now(),
+
+      name:n,
+
+      phone:ph,
+
+      desc:d,
+
+      imgs: imgs,
+
+      status: status,
+
+      author: session.username,
+
+      ts: Date.now()
+
+    };
+
+    posts.unshift(post);
+
+    savePosts();
+
+    renderPosts();
+
+    renderAdminPending();
+
+    overlay.style.display="none"; overlay.setAttribute("aria-hidden","true");
+
+    document.getElementById("upName").value=""; document.getElementById("upNum").value=""; document.getElementById("upDesc").value=""; document.getElementById("upImg").value="";
+
+    alert(status === "approved" ? "Laporan dipublikasikan." : "Laporan dikirim. Menunggu review admin.");
+
+  });
+
+}
+
+// render posts
+
+function renderPosts(query="", mode="nama"){
+
+  postsList.innerHTML = "";
+
+  const q = (query||"").toLowerCase().trim();
+
+  const filtered = posts.filter(p=>{
+
+    if(!q) return p.status === "approved";
+
+    if(mode==="nomor") return (p.phone||"").toLowerCase().includes(q);
+
+    return ((p.name||"").toLowerCase().includes(q) || (p.desc||"").toLowerCase().includes(q));
+
+  });
+
+  if(filtered.length===0){
+
+    document.getElementById("emptyNote").style.display = "block";
+
+    return;
+
+  } else document.getElementById("emptyNote").style.display = "none";
+
+  filtered.forEach((p,i)=>{
+
+    const imgHtml = (p.imgs||[]).map(src=>`<img src="${src}" style="width:100%;border-radius:8px;margin-top:6px;"/>`).join("");
+
+    const authorRole = p.author && p.author.startsWith("nonim_") ? "Akun Nonim" : (p.author === ADMIN_USERNAME ? "Admin" : "Pengguna");
+
+    postsList.insertAdjacentHTML("beforeend", `
+
+      <div class="post card">
+
+        <div class="meta">
+
+          <div class="avatar">${escapeHtml((p.name||"U").slice(0,2).toUpperCase())}</div>
+
+          <div style="flex:1">
+
+            <div style="display:flex;align-items:center;gap:8px">
+
+              <div style="font-weight:700">${escapeHtml(p.name)}</div>
+
+              <div class="role">${escapeHtml(authorRole)}</div>
+
+              ${p.status==="pending" ? `<span class="role" style="background:rgba(255,160,0,0.12);color:var(--muted)">Pending</span>` : ""}
+
+            </div>
+
+            <div class="small">${escapeHtml(p.phone)} • ${new Date(p.ts).toLocaleString()}</div>
+
+          </div>
+
+        </div>
+
+        <div>${escapeHtml(p.desc)}</div>
+
+        ${imgHtml}
+
+      </div>
+
+    `);
+
+  });
+
+}
+
+// admin pending render + actions
+
+function renderAdminPending(){
+
+  adminPending.innerHTML = "";
+
+  if(!session || session.role !== "admin"){
+
+    document.getElementById("adminView").style.display = "none";
+
+    return;
+
+  }
+
+  document.getElementById("adminView").style.display = "block";
+
+  const pending = posts.filter(p=>p.status==="pending");
+
+  if(pending.length===0){
+
+    adminPending.innerHTML = `<div class="card small">Tidak ada laporan pending.</div>`;
+
+    return;
+
+  }
+
+  pending.forEach((p, idx)=>{
+
+    adminPending.insertAdjacentHTML("beforeend", `
+
+      <div class="card">
+
+        <h4 style="margin:0 0 8px">${escapeHtml(p.name)}</h4>
+
+        <div class="small">${escapeHtml(p.phone)} • ${new Date(p.ts).toLocaleString()}</div>
+
+        <p style="margin-top:8px">${escapeHtml(p.desc)}</p>
+
+        <div style="display:flex;gap:8px;justify-content:flex-end">
+
+          <button class="btn green" onclick="adminApprove(${p.id})">Setujui</button>
+
+          <button class="btn red" onclick="adminReject(${p.id})">Hapus</button>
+
+        </div>
+
+      </div>
+
+    `);
+
+  });
+
+}
+
+// admin actions by id
+
+function adminApprove(id){
+
+  if(!session || session.role !== "admin"){ alert("Hanya admin."); return; }
+
+  const i = posts.findIndex(x=>x.id===id);
+
+  if(i===-1) return;
+
+  posts[i].status = "approved";
+
+  savePosts(); renderPosts(); renderAdminPending(); alert("Laporan disetujui.");
+
+}
+
+function adminReject(id){
+
+  if(!session || session.role !== "admin"){ alert("Hanya admin."); return; }
+
+  if(!confirm("Hapus laporan ini?")) return;
+
+  posts = posts.filter(x=>x.id!==id);
+
+  savePosts(); renderPosts(); renderAdminPending(); alert("Laporan dihapus.");
+
+}
+
+// search
+
+document.getElementById("searchBtn").addEventListener("click", ()=> {
+
+  const q = document.getElementById("searchInput").value;
+
+  const mode = document.getElementById("searchMode").value;
+
+  renderPosts(q, mode);
+
+});
+
+document.getElementById("searchInput").addEventListener("keydown", (e)=> { if(e.key==="Enter") document.getElementById("searchBtn").click(); });
+
+// views
+
+function openView(name){
+
+  document.querySelectorAll(".view").forEach(v=>v.style.display="none");
+
+  document.getElementById("homeView").style.display = (name==="home" ? "block" : "none");
+
+  document.getElemen
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>
